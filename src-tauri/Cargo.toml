@@ -1,0 +1,37 @@
+[package]
+name = "pulse"
+version = "0.1.0"
+description = "Pulse - Universal API Monitor"
+authors = ["Pulse"]
+edition = "2021"
+
+[lib]
+name = "pulse_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-shell = "2"
+tauri-plugin-notification = "2"
+tauri-plugin-autostart = "2"
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+env_logger = "0.11"
+uuid = { version = "1", features = ["v4"] }
+dirs = "6"
+futures = "0.3"
+url = "2"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
